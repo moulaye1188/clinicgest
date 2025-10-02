@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClinicGest - Solution de Gestion Médicale Professionnelle</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            font-size: 2.5rem;
+        }
+
+        .tagline {
+            color: #666;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 80px 0;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 15px 40px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 10px 30px rgba(238, 90, 36, 0.4);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(238, 90, 36, 0.6);
+        }
+
+        /* Main Content */
+        .main-content {
+            background: white;
+            border-radius: 20px 20px 0 0;
+            margin-top: -20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 60px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #f0f0f0;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 25px;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .feature-description {
+            color: #666;
+            line-height: 1.7;
+        }
+
+        /* Roles Section */
+        .roles {
+            background: linear-gradient(135deg, #f8f9ff, #e8eeff);
+            padding: 80px 0;
+        }
+
+        .roles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .role-card {
+            background: white;
+            padding: 30px 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .role-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .role-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin: 0 auto 20px;
+        }
+
+        .role-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .role-features {
+            list-style: none;
+            text-align: left;
+        }
+
+        .role-features li {
+            padding: 5px 0;
+            color: #666;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .role-features li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #10ac84;
+            font-weight: bold;
+        }
+
+        /* Technology Section */
+        .technology {
+            padding: 80px 0;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .tech-item {
+            text-align: center;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .tech-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .tech-item i {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .tech-item h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        /* Benefits Section */
+        .benefits {
+            background: linear-gradient(135deg, #2d3748, #4a5568);
+            color: white;
+            padding: 80px 0;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .benefit-item {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .benefit-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 25px;
+        }
+
+        .benefit-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .benefit-description {
+            color: #cbd5e0;
+            line-height: 1.7;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .cta-button-white {
+            background: white;
+            color: #667eea;
+            padding: 18px 45px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: inline-block;
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
+        }
+
+        .cta-button-white:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 255, 255, 0.4);
+        }
+
+        /* Footer */
+        .footer {
+            background: #2d3748;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 20px;
+            color: #667eea;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #cbd5e0;
+            text-decoration: none;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #4a5568;
+            padding-top: 20px;
+            color: #a0aec0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-card {
+                padding: 30px 20px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        /* Scroll Animations */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-hospital-alt"></i>
+                    ClinicGest
+                </div>
+                <div class="tagline">
+                    Solution de Gestion Médicale Professionnelle
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container fade-in-up">
+            <h1>Révolutionnez la Gestion de Votre Clinique</h1>
+            <p class="subtitle">Une solution complète et moderne pour optimiser tous vos workflows médicaux</p>
+            <a href="#features" class="cta-button">
+                <i class="fas fa-rocket"></i> Découvrir ClinicGest
+            </a>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Features Section -->
+        <section id="features" class="features">
+            <div class="container">
+                <h2 class="section-title scroll-reveal">Fonctionnalités Principales</h2>
+                <p class="section-subtitle scroll-reveal">Des outils puissants pour chaque aspect de votre pratique médicale</p>
+                
+                <div class="features-grid">
+                    <div class="feature-card scroll-reveal">
+                        <div class="feature-icon">
+                            <i class="fas fa-user-md"></i>
+                        </div>
+                        <h3 class="feature-title">Gestion des Médecins</h3>
+                        <p class="feature-description">
+                            Profils complets, plannings personnalisés, files d'attente en temps réel et notifications automatiques des résultats de laboratoire.
+                        </p>
+                    </div>
+
+                    <div class="feature-card scroll-reveal">
+                        <div class="feature-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3 class="feature-title">Dossiers Patients</h3>
+                        <p class="feature-description">
+                            Historique médical complet, allergies, groupes sanguins, contacts d'urgence et suivi des consultations.
+                        </p>
+                    </div>
+
+                    <div class="feature-card scroll-reveal">
+                        <div class="feature-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <h3 class="feature-title">Rendez-vous Intelligents</h3>
+                        <p class="feature-description">
+                            Planification avancée, files d'attente dynamiques, gestion des RDV non honorés avec bons de crédit automatiques.
+                        </p>
+                    </div>
+
+                    <div class="feature-card scroll-reveal">
+                        <div class="feature-icon">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                        </div>
+                        <h3 class="feature-title">Facturation Automatisée</h3>
+                        <p class="feature-description">
+                            Génération automatique de factures, suivi des paiements, queue de facturation et recherche avancée.
+                        </p>
+                    </div>
+
+                    <div class="feature-card scroll-reveal">
+                        <div class="feature-icon">
+                            <i class="fas fa-flask"></i>
+                        </div>
+                        <h3 class="feature-title">Laboratoire Intégré</h3>
+                        <p class="feature-description">
+                            Gestion des résultats d'analyses, notifications automatiques, transfert entre médecins et auto-refresh en temps réel.
+                        </p>
+                    </div>
+
+                    <div class="feature-card scroll-reveal">
+                        <div class="feature-icon">
+                            <i class="fas fa-folder-medical"></i>
+                        </div>
+                        <h3 class="feature-title">Dossiers Médicaux Électroniques</h3>
+                        <p class="feature-description">
+                            Consultations détaillées, prescriptions avec posologie, examens prescrits et historique complet organisé.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Roles Section -->
+        <section class="roles">
+            <div class="container">
+                <h2 class="section-title scroll-reveal">Rôles et Accès Personnalisés</h2>
+                <p class="section-subtitle scroll-reveal">Chaque utilisateur dispose d'un accès adapté à ses responsabilités</p>
+                
+                <div class="roles-grid">
+                    <div class="role-card scroll-reveal">
+                        <div class="role-icon">
+                            <i class="fas fa-stethoscope"></i>
+                        </div>
+                        <h3 class="role-title">Médecins</h3>
+                        <ul class="role-features">
+                            <li>Accès complet aux dossiers patients</li>
+                            <li>Gestion des consultations</li>
+                            <li>Notifications laboratoire en temps réel</li>
+                            <li>Planning personnel et file d'attente</li>
+                            <li>Transfert de résultats entre confrères</li>
+                        </ul>
+                    </div>
+
+                    <div class="role-card scroll-reveal">
+                        <div class="role-icon">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <h3 class="role-title">Secrétaires</h3>
+                        <ul class="role-features">
+                            <li>Gestion des rendez-vous</li>
+                            <li>Accès aux informations patients</li>
+                            <li>Traitement de la facturation</li>
+                            <li>Gestion des RDV non honorés</li>
+                            <li>Interface de queue de facturation</li>
+                        </ul>
+                    </div>
+
+                    <div class="role-card scroll-reveal">
+                        <div class="role-icon">
+                            <i class="fas fa-microscope"></i>
+                        </div>
+                        <h3 class="role-title">Laboratoire</h3>
+                        <ul class="role-features">
+                            <li>Upload et gestion des résultats</li>
+                            <li>Templates pour analyses standardisées</li>
+                            <li>Notifications automatiques</li>
+                            <li>Tableau de bord spécialisé</li>
+                            <li>Nommage intelligent des fichiers</li>
+                        </ul>
+                    </div>
+
+                    <div class="role-card scroll-reveal">
+                        <div class="role-icon">
+                            <i class="fas fa-crown"></i>
+                        </div>
+                        <h3 class="role-title">Administrateur</h3>
+                        <ul class="role-features">
+                            <li>Gestion complète des utilisateurs</li>
+                            <li>Configuration système</li>
+                            <li>Accès à tous les modules</li>
+                            <li>Paramètres globaux</li>
+                            <li>Monitoring et statistiques</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technology Section -->
+        <section class="technology">
+            <div class="container">
+                <h2 class="section-title scroll-reveal">Technologies Modernes</h2>
+                <p class="section-subtitle scroll-reveal">Built with cutting-edge technology for performance and reliability</p>
+                
+                <div class="tech-grid">
+                    <div class="tech-item scroll-reveal">
+                        <i class="fab fa-react"></i>
+                        <h3>React 18</h3>
+                        <p>Interface moderne avec TypeScript</p>
+                    </div>
+                    <div class="tech-item scroll-reveal">
+                        <i class="fab fa-python"></i>
+                        <h3>Flask</h3>
+                        <p>Backend robuste avec SQLAlchemy</p>
+                    </div>
+                    <div class="tech-item scroll-reveal">
+                        <i class="fas fa-database"></i>
+                        <h3>SQLite</h3>
+                        <p>Base de données optimisée</p>
+                    </div>
+                    <div class="tech-item scroll-reveal">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>JWT Security</h3>
+                        <p>Authentification sécurisée</p>
+                    </div>
+                    <div class="tech-item scroll-reveal">
+                        <i class="fas fa-mobile-alt"></i>
+                        <h3>Responsive</h3>
+                        <p>Design adaptatif multi-écrans</p>
+                    </div>
+                    <div class="tech-item scroll-reveal">
+                        <i class="fas fa-sync-alt"></i>
+                        <h3>Auto-Refresh</h3>
+                        <p>Mise à jour temps réel</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Benefits Section -->
+        <section class="benefits">
+            <div class="container">
+                <h2 class="section-title scroll-reveal">Avantages Métier</h2>
+                <p class="section-subtitle scroll-reveal">Des bénéfices concrets pour votre pratique quotidienne</p>
+                
+                <div class="benefits-grid">
+                    <div class="benefit-item scroll-reveal">
+                        <div class="benefit-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3 class="benefit-title">Gain de Temps</h3>
+                        <p class="benefit-description">
+                            Automatisation des tâches répétitives et workflows optimisés pour chaque rôle.
+                        </p>
+                    </div>
+
+                    <div class="benefit-item scroll-reveal">
+                        <div class="benefit-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3 class="benefit-title">Meilleure Organisation</h3>
+                        <p class="benefit-description">
+                            Centralisation des données, suivi en temps réel et planification efficace des ressources.
+                        </p>
+                    </div>
+
+                    <div class="benefit-item scroll-reveal">
+                        <div class="benefit-icon">
+                            <i class="fas fa-euro-sign"></i>
+                        </div>
+                        <h3 class="benefit-title">Optimisation Financière</h3>
+                        <p class="benefit-description">
+                            Facturation automatique sans erreur et réduction des pertes liées aux annulations.
+                        </p>
+                    </div>
+
+                    <div class="benefit-item scroll-reveal">
+                        <div class="benefit-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h3 class="benefit-title">Qualité des Soins</h3>
+                        <p class="benefit-description">
+                            Dossiers patients complets et accessibles avec suivi médical continu et organisé.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="container">
+                <h2 class="scroll-reveal">Prêt à Transformer Votre Clinique ?</h2>
+                <p class="scroll-reveal">Rejoignez les centaines de professionnels de santé qui font déjà confiance à ClinicGest</p>
+                <a href="#contact" class="cta-button-white scroll-reveal">
+                    <i class="fas fa-phone"></i> Demander une Démonstration
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ClinicGest</h3>
+                    <p>Solution complète de gestion médicale pour optimiser votre pratique professionnelle.</p>
+                    <p><i class="fas fa-envelope"></i> contact@clinicgest.com</p>
+                    <p><i class="fas fa-phone"></i> +33 1 23 45 67 89</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Fonctionnalités</h3>
+                    <a href="#features">Gestion des Patients</a>
+                    <a href="#features">Rendez-vous Intelligents</a>
+                    <a href="#features">Facturation Automatisée</a>
+                    <a href="#features">Laboratoire Intégré</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <a href="#support">Documentation</a>
+                    <a href="#support">Formation</a>
+                    <a href="#support">Support Technique</a>
+                    <a href="#support">Mises à jour</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Entreprise</h3>
+                    <a href="#about">À propos</a>
+                    <a href="#security">Sécurité</a>
+                    <a href="#privacy">Confidentialité</a>
+                    <a href="#terms">Conditions d'utilisation</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 ClinicGest. Tous droits réservés. | Solution de Gestion Médicale Professionnelle</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Scroll reveal animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Add some interactive features
+        document.querySelectorAll('.feature-card, .role-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Parallax effect for hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+    </script>
+</body>
+</html>
